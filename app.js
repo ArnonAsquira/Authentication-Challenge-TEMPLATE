@@ -13,6 +13,10 @@ app.use('/users', userRouters);
 
 app.use('/api', apiRouters);
 
+app.options('/', (req, res) => {
+    
+})
+
 
 app.use((req, res, next) => {
     res.send('unknown endpoint');

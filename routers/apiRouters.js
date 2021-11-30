@@ -14,6 +14,12 @@ router.get('/v1/information',authenticateToken, (req, res, next) => {
 })
 
 
+router.get('/v1/users',authenticateToken ,(req, res) => {
+   if (!req.user.isAdmin) return res.status(403).send('unauthorized');
+   res.send({users: USERS});
+})
+
+
 
 router.use(errorHandler);
 

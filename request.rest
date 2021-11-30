@@ -22,3 +22,14 @@ Content-Type: application/json
     "email": "admin@email.com",
     "password": "Rc123456!"
 }
+###
+POST http://localhost:3000/users/token
+Content-Type: application/json
+
+{
+    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluQGVtYWlsLmNvbSIsIm5hbWUiOiJhZG1pbiIsInBhc3N3b3JkIjoiJDJiJDEwJFRLODc3ZTJ3cm9kLmZLbkkxQm9UT3V2bXhocjRZWm9NUVZDQkNjQVViTmdNYkI0MlpjT1dtIiwiaXNBZG1pbiI6dHJ1ZSwiaWF0IjoxNjM4MjkwNjYyfQ.ReaJUdqA3G3sw7xupOsTHhsOcxZF5YNUvr6ulMidbNY" 
+}
+
+### 
+GET http://localhost:3000/api/v1/users
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluQGVtYWlsLmNvbSIsIm5hbWUiOiJhZG1pbiIsInBhc3N3b3JkIjoiJDJiJDEwJExqYzRUYTlEdm1pbzBhSGVWeVRiMi40eWgzOWxCd05LbmhueEh1YkxWd0FBZXd2dnpDQnkuIiwiaXNBZG1pbiI6dHJ1ZSwiaWF0IjoxNjM4MjkxNjI0LCJleHAiOjE2MzgyOTE2MzR9.KewS3XBT-TsPwbC8VZxTESV_dxj7RrkRqaHmKOI7Tp8
