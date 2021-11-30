@@ -1,0 +1,19 @@
+GET http://localhost:3000/api/v1/information
+Authorization: bearer 123
+###
+POST http://localhost:3000/users/register
+Content-Type: application/json
+
+{
+    "email": "ernio@gmail.com",
+    "user": {"email": "ernio@gmail.com", "name": "Arnon", "password": "hello to you", "isAdmin": false},
+    "password": "hello to you"
+}
+###
+POST http://localhost:3000/users/login
+Content-Type: application/json
+
+{
+    "email": "ernio@gmail.com",
+    "password": "hello to you"
+}
