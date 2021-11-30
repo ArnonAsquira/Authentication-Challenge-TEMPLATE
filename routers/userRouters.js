@@ -1,9 +1,9 @@
 const express = require('express');
-const router = express.Router();
+const router = express();
 const bcrypt = require('bcrypt');
 const { errorHandler } = require('../middlewares/errorHnadler'); 
 const { validateRegisterBody, validateExistingUser, validateUser, authenticateToken } = require('../middlewares/validateSchema');
-const { USERS, INFORMATION, REFRESHTOKENS } = require('../usersDB');
+const { USERS, INFORMATION, REFRESHTOKENS, updateINFORMTION, updateUSERS } = require('../usersDB');
 const jwt = require('jsonwebtoken');
 const { JWT_ACCES_SECRET, JWT_REFRESH_SECRET } = require('../env');
 const { generateAccesToken } = require('../utils/jwtFunction');
@@ -12,12 +12,12 @@ router.post('/register', validateRegisterBody,  validateExistingUser, async (req
     const body = req.body;
     try {
         const hashedPassword = await bcrypt.hash(body.password, 10);
-        body.user.password = hashedPassword;
-        USERS.push(body.user);
-        INFORMATION.push({email: body.email, info: `${body.user.name} info`});
+        body.password = hashedPassword;
+        updateUSERS(body);
+        updateINFORMTION({email: body.email, info: `${body.name} info`})
         res.status(201).send('Register Success');
     } catch (err) {
-        next(err || 'something went wrong');
+        next(err);
     }
 })
 
@@ -63,7 +63,11 @@ router.post('/logout', (req, res, next) => {
     const refreshToken = req.body.token;
     if (!refreshToken) return res.status(400).send('Refresh Token Required');
     if (!REFRESHTOKENS.includes(refreshToken)) return res.status(400).send('Invalid Refresh Token');
-    REFRESHTOKENS = REFRESHTOKENS.filter(token => token !== refreshToken);
+    REFRESHTOKENS.forEach((token, i) => {
+        if (token === refreshToken) {
+            REFRESHTOKENS.splice(i, 1);
+        }
+    });
     res.send('User Logged Out Successfully')
 })
 

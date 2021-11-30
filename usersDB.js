@@ -1,13 +1,27 @@
-const USERS = [];
-const INFORMATION = [
+const USERS = [
     {
-    "name": "admin",
-    "password": "$2b$10$wpBN0Lm87wfDivAnjNtJwuGLXkLbE/ZHZ5DcBola.EiL03Bapxmr2",
-    "email": "admin@email.com",
-    "isAdmin": true
-}
+        "name": "admin",
+        "password": "$2b$10$wpBN0Lm87wfDivAnjNtJwuGLXkLbE/ZHZ5DcBola.EiL03Bapxmr2",
+        "email": "admin@email.com",
+        "isAdmin": true
+    }
+];
+const INFORMATION = [
 ];
 const REFRESHTOKENS = [];
+
+function updateUSERS(newUser) {
+   if (!newUser) return USERS;
+   USERS.push(newUser);
+   return USERS;
+}
+
+function updateINFORMTION(newObj) {
+    if (!newObj) return INFORMATION;
+    INFORMATION.push(newObj);
+    return INFORMATION;
+ }
+
 
 const adminEndpoints = [
     { method: "post", path: "/users/register", description: "Register, Required: email, name, password", example: { body: { email: "user@email.com", name: "user", password: "password" } } },
@@ -30,7 +44,7 @@ const invalidTokenEndpoints = [
     { method: "post", path: "/users/token", description: "Renew access token, Required: valid refresh token", example: { headers: { token: "\*Refresh Token\*" } } },
 ]
 
-const authenticatedUser = [
+const authenticatedUserEndPoints = [
     { method: "post", path: "/users/register", description: "Register, Required: email, name, password", example: { body: { email: "user@email.com", name: "user", password: "password" } } },
     { method: "post", path: "/users/login", description: "Login, Required: valid email and password", example: { body: { email: "user@email.com", password: "password" } } },
     { method: "post", path: "/users/token", description: "Renew access token, Required: valid refresh token", example: { headers: { token: "\*Refresh Token\*" } } },
@@ -43,5 +57,11 @@ const authenticatedUser = [
 module.exports = {
     USERS,
     INFORMATION,
-    REFRESHTOKENS
+    REFRESHTOKENS,
+    updateINFORMTION,
+    updateUSERS,
+    adminEndpoints,
+    authenticatedUserEndPoints,
+    noTokenENdpoints,
+    invalidTokenEndpoints
 }

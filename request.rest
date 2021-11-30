@@ -7,20 +7,16 @@ Content-Type: application/json
 {
     "email": "admin@email.com", 
     "password": "Rc123456!",
-    "user": {
-        "email": "admin@email.com", 
-        "name": "admin",
-        "password": "Rc123456!",
-        "isAdmin": true 
-    }
+    "name": "admin",
+    "isAdmin": true
 }
 ###
 POST http://localhost:3000/users/login
 Content-Type: application/json
 
 {
-    "email": "admin@email.com",
-    "password": "Rc123456!"
+    "email": "test@test.com",
+    "password": "Aa123456!"
 }
 ###
 POST http://localhost:3000/users/token
@@ -33,3 +29,19 @@ Content-Type: application/json
 ### 
 GET http://localhost:3000/api/v1/users
 Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluQGVtYWlsLmNvbSIsIm5hbWUiOiJhZG1pbiIsInBhc3N3b3JkIjoiJDJiJDEwJExqYzRUYTlEdm1pbzBhSGVWeVRiMi40eWgzOWxCd05LbmhueEh1YkxWd0FBZXd2dnpDQnkuIiwiaXNBZG1pbiI6dHJ1ZSwiaWF0IjoxNjM4MjkxNjI0LCJleHAiOjE2MzgyOTE2MzR9.KewS3XBT-TsPwbC8VZxTESV_dxj7RrkRqaHmKOI7Tp8
+
+###
+POST http://localhost:3000/users/register
+Content-Type: application/json
+
+{
+    "name": "test",
+    "email": "test@test.com",
+    "password": "Aa123456!"
+}
+###
+GET http://localhost:3000/api/v1/information
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoidGVzdCIsImVtYWlsIjoidGVzdEB0ZXN0LmNvbSIsInBhc3N3b3JkIjoiJDJiJDEwJFNrcndMbEJRQWZxVFRIcEg4NmF5SWVaekRacTNiOVJ2cU04bGx4eUlSVlNCVHhJTXBNaWxpIiwiaWF0IjoxNjM4MzAwOTAzLCJleHAiOjE2MzgzMDA5MTN9.moiwEo6cjLCP0pDt5DsFzn0smws02ovIyqFTda7jpjY
+###
+OPTIONS http://localhost:3000/
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoidGVzdCIsImVtYWlsIjoidGVzdEB0ZXN0LmNvbSIsInBhc3N3b3JkIjoiJDJiJDEwJGpuVVhrRjJ3aHh0Lll3ZmJaTzVtNS52YVZQR1Rwd3BJRWwzT1BHd2ZrZk9iOFJ0c1U2RkIuIiwiaWF0IjoxNjM4MzAyMjU3LCJleHAiOjE2MzgzMDIyNjd9.z8FEeLTE0uwcB5SI-CMobPdoYge4Frnrb2N5hUWr4S0

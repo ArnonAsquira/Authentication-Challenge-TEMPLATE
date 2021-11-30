@@ -1,6 +1,6 @@
 function  errorHandler (err, req, res, next) {
-    console.log(err);
-    res.status(400).send({error: err});
+    console.log(err, req.body);
+    res.end({error: err});
 }
 
 module.exports ={
