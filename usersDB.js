@@ -10,16 +10,22 @@ const INFORMATION = [
 ];
 const REFRESHTOKENS = [];
 
-function updateUSERS(newUser) {
-   if (!newUser) return USERS;
+function pushToUSERS(newUser) {
    USERS.push(newUser);
    return USERS;
 }
 
-function updateINFORMTION(newObj) {
-    if (!newObj) return INFORMATION;
+function pushToINFORMTION(newObj) {
     INFORMATION.push(newObj);
     return INFORMATION;
+ }
+
+ function getInformation() {
+    return INFORMATION;
+ }
+
+ function  getUseres() {
+    return USERS;
  }
 
 
@@ -56,10 +62,12 @@ const authenticatedUserEndPoints = [
 
 module.exports = {
     USERS,
+    pushToUSERS,
+    pushToINFORMTION,
+    getInformation,
+    getUseres,
     INFORMATION,
     REFRESHTOKENS,
-    updateINFORMTION,
-    updateUSERS,
     adminEndpoints,
     authenticatedUserEndPoints,
     noTokenENdpoints,

@@ -1,9 +1,9 @@
-const { USERS, updateUSERS, adminEndpoints, authenticatedUserEndPoints, noTokenENdpoints, invalidTokenEndpoints } = require('../usersDB');
+const { getUseres, adminEndpoints, authenticatedUserEndPoints, noTokenENdpoints, invalidTokenEndpoints } = require('../usersDB');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
-const { JWT_ACCES_SECRET, JWT_REFRESH_SECRET } = require('../env');
+const { JWT_ACCES_SECRET } = require('../env');
 
-function validateRegisterBody (req, res, next) {
+function validateBodySchema (req, res, next) {
     const body = req.body;
     if (!body.email || !body.name || !body.password) throw ('invalid request form');
     next()
@@ -11,14 +11,14 @@ function validateRegisterBody (req, res, next) {
 
 function validateExistingUser (req, res, next) {
     const body = req.body;
-    const isExistingUser =  updateUSERS().find(user => user.name === body.name);
+    const isExistingUser = getUseres().find(user => user.name === body.name);
     if (isExistingUser) return res.status(409).send('user already exists');
     next ();
 }
 
 function validateUser (req, res, next) {
     const body = req.body;
-    const user =updateUSERS().find(user => user.email === body.email);
+    const user = getUseres().find(user => user.email === body.email);
     if (!user) return res.status(404).send('cannot find user');
     if (!bcrypt.compare(body.password, user.password)) return res.status(403).send('User or Password incorrect');
     next();
@@ -50,7 +50,7 @@ function checkEndpoints(req, res, next) {
 }
 
 module.exports = {
-    validateRegisterBody,
+    validateBodySchema,
     validateExistingUser,
     validateUser,
     authenticateToken,
