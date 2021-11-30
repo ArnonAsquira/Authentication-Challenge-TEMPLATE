@@ -36,10 +36,14 @@ router.post('/login',  validateUser, (req, res) => {
 
 
 
-router.post('/tokenValidate', authenticateToken, (req, res, next) => [
+router.post('/tokenValidate', authenticateToken, (req, res, next) => {
     res.send({valid: true})
-])
+})
 
+router.post('/token', (req, res, next) => {
+    const body = req.body;
+    res.send(body.refreshToken)
+})
 
 
 router.use(errorHandler);
